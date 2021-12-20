@@ -8,11 +8,12 @@ let deleteFile = (path) => {
 };
 
 beforeEach(() => {
-  deleteFile(`${__dirname}/task.txt`);
-  deleteFile(`${__dirname}/completed.txt`);
+  // deleteFile(`${__dirname}/task.txt`);
+  // deleteFile(`${__dirname}/completed.txt`);
+  fs.writeFileSync("todos.json", "");
 });
 
-let tasksTxtCli = (...args) => [`${__dirname}/task`, ...args].join(" ");
+let tasksTxtCli = (...args) => [`${__dirname}/task.sh`, ...args].join(" ");
 
 let usage = `Usage :-
 $ ./task add 2 hello world    # Add a new item with priority 2 and text "hello world" to the list
