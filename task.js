@@ -17,6 +17,7 @@ let argsData=arguments;
 
 
 switch(arguments[0]){
+     //Add A Todo Task
     case 'add':
         argsData.shift();
         let data=argsData.join(" ");
@@ -24,6 +25,7 @@ switch(arguments[0]){
             console.log("Error: Missing tasks string. Nothing added!")
             break;
         }
+        //Splits Priority And Data(Task) for Structuring!
         let [priority,...work]=data.split(" ");
         let todo=work.join(" ");
         let task={
@@ -39,7 +41,8 @@ switch(arguments[0]){
         });
         fs.writeFileSync("todos.json",JSON.stringify(tasks))
         break;
-
+    
+    //List All Pending Tasks
     case 'ls':
         incompleteTasks=tasks.filter((task)=>(task.done!==1));
 
@@ -52,7 +55,8 @@ switch(arguments[0]){
             console.log(`${i}. ${incompleteTasks[i-1].todo} [${incompleteTasks[i-1].priority}]`)
         }
         break;
-
+        
+    //List All Completed Tasks
     case 'ls-c':
         completeTasks=tasks.filter((task)=>(task.done===1));
 
@@ -60,7 +64,7 @@ switch(arguments[0]){
             console.log(`${i}. ${completeTasks[i-1].todo} [${completeTasks[i-1].priority}]`)
         }
         break;
-
+    //Show Help
     case undefined:
 
     case 'help':
@@ -73,7 +77,7 @@ switch(arguments[0]){
         console.log( "$ ./task report               # Statistics");
         break;
 
-
+    //Delete A Task
     case 'del':
         index=argsData[1];
         index--;
@@ -91,7 +95,8 @@ switch(arguments[0]){
         fs.writeFileSync("todos.json",JSON.stringify(tasks))
         console.log(`Deleted task #${index+1}`)
         break;
-
+        
+    //Mark A Task As Complete
     case 'done':
         index=argsData[1];
         index--;
@@ -117,7 +122,8 @@ switch(arguments[0]){
         fs.writeFileSync("todos.json",JSON.stringify(tasks));
         console.log("Marked item as done.")
         break;
-
+        
+    //Get A Report Of Your Tasks
     case 'report':
         incompleteTasks=tasks.filter((task)=>(task.done!==1));
 
